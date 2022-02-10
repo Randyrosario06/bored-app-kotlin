@@ -13,11 +13,19 @@ import com.android.volley.toolbox.*
 
 class MainActivity : AppCompatActivity() {
     var textView : TextView? = null
-     var btnGet :Button? = null
+    var title : TextView? = null
+    var type: TextView? = null
+    var participants : TextView? = null
+    var price : TextView? = null
+    var btnGet :Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textView = findViewById(R.id.txtWelcome)
+        title = findViewById(R.id.title)
+        type = findViewById(R.id.type)
+        participants = findViewById(R.id.participants)
+        price = findViewById(R.id.price)
         btnGet= findViewById(R.id.btnStopBoring)
         btnGet?.setOnClickListener {
             GetActivity()
@@ -37,11 +45,14 @@ class MainActivity : AppCompatActivity() {
 
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
                  { response ->
-                    Log.d("RESPONSE", response.toString())
-                  textView?.text = "Response: %s"+response.toString()
+                    //textView?.text = response.getString("activity")
+                    title?.text = response.getString("activity")
+                    type?.text = response.getString("type")
+                    participants?.text = response.getString("participants")
+                    price?.text = response.getString("price")
                 },
                 Response.ErrorListener { error ->
-                    // TODO: Handle error
+                    textView?.text = "Ha ocurrido algo inesperado :(, intenta de nuevo"
                 }
         )
         requestQueue.add(jsonObjectRequest)
