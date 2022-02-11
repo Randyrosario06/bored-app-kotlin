@@ -1,15 +1,21 @@
 package com.randy.imbored
 
 import android.app.DownloadManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.*
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
     var textView : TextView? = null
@@ -18,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     var participants : TextView? = null
     var price : TextView? = null
     var btnGet :Button? = null
+    var imgType : ImageView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,12 +34,14 @@ class MainActivity : AppCompatActivity() {
         participants = findViewById(R.id.participants)
         price = findViewById(R.id.price)
         btnGet= findViewById(R.id.btnStopBoring)
+        imgType = findViewById(R.id.imgType)
         btnGet?.setOnClickListener {
             GetActivity()
         }
     }
 
     fun  GetActivity(){
+        GetTypeImage()
         // Instantiate the cache
         val cache = DiskBasedCache(cacheDir, 1024 * 1024) // 1MB cap
 
@@ -56,5 +65,42 @@ class MainActivity : AppCompatActivity() {
                 }
         )
         requestQueue.add(jsonObjectRequest)
+    }
+
+    fun GetTypeImage(){
+        val executor = Executors.newSingleThreadExecutor()
+
+        // Once the executor parses the URL
+        // and receives the image, handler will load it
+        // in the ImageView
+        val handler = Handler(Looper.getMainLooper())
+
+        // Initializing the image
+        var image: Bitmap? = null
+
+        // Only for Background process (can take time depending on the Internet speed)
+        executor.execute {
+
+            // Image URL
+            val imageURL = "https://images.unsplash.com/photo-1536329583941-14287ec6fc4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+
+            // Tries to get the image and post it in the ImageView
+            // with the help of Handler
+            try {
+                val `in` = java.net.URL(imageURL).openStream()
+                image = BitmapFactory.decodeStream(`in`)
+
+                // Only for making changes in UI
+                handler.post {
+                    imgType?.setImageBitmap(image)
+                }
+            }
+
+            // If the URL doesnot point to
+            // image or any other kind of failure
+            catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
