@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun  GetActivity(){
-        GetTypeImage()
+
         // Instantiate the cache
         val cache = DiskBasedCache(cacheDir, 1024 * 1024) // 1MB cap
 
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                     type?.text = response.getString("type")
                     participants?.text = response.getString("participants")
                     price?.text = response.getString("price")
+                     GetTypeImage(type?.text.toString())
                 },
                 Response.ErrorListener { error ->
                     textView?.text = "Ha ocurrido algo inesperado :(, intenta de nuevo"
@@ -67,7 +68,8 @@ class MainActivity : AppCompatActivity() {
         requestQueue.add(jsonObjectRequest)
     }
 
-    fun GetTypeImage(){
+    fun GetTypeImage(type : String){
+        var imageURL = ""
         val executor = Executors.newSingleThreadExecutor()
 
         // Once the executor parses the URL
@@ -82,7 +84,12 @@ class MainActivity : AppCompatActivity() {
         executor.execute {
 
             // Image URL
-            val imageURL = "https://images.unsplash.com/photo-1536329583941-14287ec6fc4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+            when(type){
+                "education"->imageURL = "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZWR1Y2F0aW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+                "recreational"-> imageURL = "https://images.unsplash.com/photo-1572983390686-9f04d1fb480c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVjcmVhdGlvbmFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+                "social"-> imageURL = "https://images.unsplash.com/photo-1536329583941-14287ec6fc4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+                else->imageURL = "https://images.unsplash.com/photo-1606103920295-9a091573f160?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym9yZWR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+            }
 
             // Tries to get the image and post it in the ImageView
             // with the help of Handler
