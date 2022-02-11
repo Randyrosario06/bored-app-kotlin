@@ -10,9 +10,9 @@
         android:id="@+id/card_view"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_width="200dp"
-        android:layout_height="295dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="300dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="80dp"
         card_view:cardCornerRadius="4dp">
         <LinearLayout
@@ -28,40 +28,45 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:text="Actividad:"
+                    android:text="Actividad"
                     android:id="@+id/lbltitle"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"/>
                 <TextView
                     android:text="klk1"
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="17dp"/>
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:text="Tipo:"
+                android:text="Tipo"
                 android:id="@+id/lblType"
                 android:layout_width="match_parent"
                 android:textAlignment="center"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="10dp"
+                android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
                 android:text="klk1"
                 android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:textAlignment="center"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                />
         </LinearLayout>
 
             <LinearLayout
@@ -69,20 +74,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:text="Participantes:"
+                    android:text="Participantes"
                     android:id="@+id/lblParticipants"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"/>
                 <TextView
                     android:text="klk1"
                     android:id="@+id/participants"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:textSize="17dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -90,20 +97,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:text="Precio:"
+                    android:text="Precio"
                     android:id="@+id/lblPrice"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"/>
                 <TextView
                     android:text="klk1"
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="17dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -112,9 +121,11 @@
         android:id="@+id/txtWelcome"
         android:layout_below="@+id/card_view"
         android:layout_centerInParent="true"
+        android:padding="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aburrid0? Presiona el botón para hacer algo entretenido!"/>
+
+        android:text="Aburrid@? Presiona el botón para hacer algo entretenido!"/>
     <Button
         android:text="Buscar Actividad!"
         android:id="@+id/btnStopBoring"
